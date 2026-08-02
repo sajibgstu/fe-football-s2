@@ -573,19 +573,24 @@
   const GOOGLE_FORM_URL = "https://forms.gle/Z4uTN61wGSSzSCdP6"; // paste your Google Form link
   const TOURNAMENT_DATE = "2026-08-05T15:00:00"; // countdown target
   const TEAMS = [
-    {name:"Phoenix XI", owner:"Shoaibul Islam Sizzle", manager:"Manager Name", players:[
+    // stats: P = Played, W = Won, D = Drawn, L = Lost, GD = Goal Difference, Pts = Points
+    {name:"Phoenix XI", owner:"Shoaibul Islam Sizzle", manager:"Manager Name",
+     stats:{P:0, W:0, D:0, L:0, GD:0, Pts:0}, players:[
       "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
       "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
     ]},
-    {name:"Typhoon XI", owner:"Md Tawhidul Islam", manager:"Manager Name", players:[
+    {name:"Typhoon XI", owner:"Md Tawhidul Islam", manager:"Manager Name",
+     stats:{P:0, W:0, D:0, L:0, GD:0, Pts:0}, players:[
       "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
       "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
     ]},
-    {name:"Team C", owner:"Owner Name", manager:"Manager Name", players:[
+    {name:"Team C", owner:"Owner Name", manager:"Manager Name",
+     stats:{P:0, W:0, D:0, L:0, GD:0, Pts:0}, players:[
       "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
       "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
     ]},
-    {name:"Team D", owner:"Owner Name", manager:"Manager Name", players:[
+    {name:"Team D", owner:"Owner Name", manager:"Manager Name",
+     stats:{P:0, W:0, D:0, L:0, GD:0, Pts:0}, players:[
       "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
       "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
     ]},
@@ -684,10 +689,12 @@
   });
 
   const pointsBody = document.getElementById('pointsBody');
-  TEAMS.forEach((team,i)=>{
+  const standings = [...TEAMS].sort((a,b)=> (b.stats.Pts - a.stats.Pts) || (b.stats.GD - a.stats.GD));
+  standings.forEach((team,i)=>{
+    const s = team.stats;
     pointsBody.insertAdjacentHTML('beforeend', `
       <tr>
-        <td>${i+1}</td><td>${team.name}</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="pts">0</td>
+        <td>${i+1}</td><td>${team.name}</td><td>${s.P}</td><td>${s.W}</td><td>${s.D}</td><td>${s.L}</td><td>${s.GD}</td><td class="pts">${s.Pts}</td>
       </tr>`);
   });
 
