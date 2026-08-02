@@ -573,33 +573,33 @@
   const GOOGLE_FORM_URL = "https://forms.gle/Z4uTN61wGSSzSCdP6"; // paste your Google Form link
   const TOURNAMENT_DATE = "2026-08-05T15:00:00"; // countdown target
   const TEAMS = [
-    {name:"Phoenix XI", owner:"Shoaibul Islam Sizzle", players:[
+    {name:"Phoenix XI", owner:"Shoaibul Islam Sizzle", manager:"Manager Name", players:[
       "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
       "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
     ]},
-    {name:"Typhoon XI", owner:"Md Tawhidul Islam", players:[
+    {name:"Typhoon XI", owner:"Md Tawhidul Islam", manager:"Manager Name", players:[
       "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
       "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
     ]},
-    {name:"Team C", owner:"Owner Name", players:[
+    {name:"Team C", owner:"Owner Name", manager:"Manager Name", players:[
       "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
       "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
     ]},
-    {name:"Team D", owner:"Owner Name", players:[
+    {name:"Team D", owner:"Owner Name", manager:"Manager Name", players:[
       "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
       "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
     ]},
   ];
   const FIXTURES = [
-    {match:"1", teams:"Phoenix XI vs Team B", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+    {match:"1", teams:"Phoenix XI vs Typhoon XI", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
      played:false, ht:"", ft:"", motm:""},
     {match:"2", teams:"Phoenix XI vs Team C", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
      played:false, ht:"", ft:"", motm:""},
     {match:"3", teams:"Phoenix XI vs Team D", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
      played:false, ht:"", ft:"", motm:""},
-    {match:"4", teams:"Team B vs Team C", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+    {match:"4", teams:"Typhoon XI vs Team C", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
      played:false, ht:"", ft:"", motm:""},
-    {match:"5", teams:"Team B vs Team D", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+    {match:"5", teams:"Typhoon XI vs Team D", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
      played:false, ht:"", ft:"", motm:""},
     {match:"6", teams:"Team C vs Team D", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
      played:false, ht:"", ft:"", motm:""},
@@ -634,6 +634,7 @@
         <div class="crest">${initials}</div>
         <h3>${team.name}</h3>
         <p class="owner">Owner: ${team.owner || 'TBA'}</p>
+        <p class="manager">Manager: ${team.manager || 'TBA'}</p>
         <details class="player-list">
           <summary>Player List (${(team.players||[]).length})</summary>
           <ul>${playersHTML}</ul>
