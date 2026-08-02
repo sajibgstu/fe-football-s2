@@ -428,7 +428,7 @@
   </svg>
   <div class="eyebrow">Food Engineering Presents</div>
   <h1>INTRA DEPARTMENT<br><span>FOOTBALL</span> TOURNAMENT</h1>
-  <p class="sub">2026 &middot; Season 2 — রেজিস্ট্রেশন, ফিক্সচার, পয়েন্ট টেবিল সব একসাথে।</p>
+  <p class="sub">2026 &middot; Season 2 — টিম রেজিস্ট্রেশন, ফিক্সচার, পয়েন্ট টেবিল সব একসাথে।</p>
 
   <div class="scoreboard" id="countdown">
     <div class="flip"><span class="num" id="cd-days">00</span><span class="lbl">Days</span></div>
@@ -438,7 +438,7 @@
   </div>
 
   <div class="cta">
-    <a href="#register" class="btn btn-primary">রেজিস্টার করুন</a>
+    <a href="#register" class="btn btn-primary">টিম রেজিস্টার করুন</a>
     <a href="#teams" class="btn btn-ghost">ফিক্সচার দেখুন</a>
   </div>
   </div>
@@ -521,10 +521,10 @@
     <div class="reg-wrap reg-wrap-cta">
       <div class="reg-note">
         <h3>খেলার জন্য প্রস্তুত?</h3>
-        <p>নিচের বাটনে ক্লিক করে Google Form-এ আপনি রেজিস্ট্রেশন সম্পন্ন করুন। সব তথ্য সরাসরি organizer-দের কাছে জমা হবে।</p>
+        <p>নিচের বাটনে ক্লিক করে Google Form-এ আপনার টিম রেজিস্ট্রেশন সম্পন্ন করুন। সব তথ্য সরাসরি organizer-দের কাছে জমা হবে।</p>
         <ul>
-          <li>প্রতি টিমে সর্বনিম্ন প্লেয়ার সংখ্যে ১২-১৩ </li>
-          <li>রেজিস্ট্রেশন ডেডলাইন ০৫/০৮/২০২৬ </li>
+          <li>প্রতি টিমে সর্বনিম্ন প্লেয়ার সংখ্যা ফর্মে উল্লেখ থাকবে</li>
+          <li>রেজিস্ট্রেশন ডেডলাইন ফর্মে দেখানো হবে</li>
           <li>ফর্ম পূরণের পর confirmation পেতে সঠিক ফোন নম্বর দিন</li>
         </ul>
       </div>
@@ -547,7 +547,7 @@
     <div class="section-head">
       <span class="eyebrow">Throwback</span>
       <h2>Season 1 Highlights</h2>
-      <p>গত সিজনের সেরা মুহূর্তগুলো।</p>
+      <p>গত সিজনের সেরা মুহূর্তগুলো — এখানে আগের টুর্নামেন্টের ছবি যোগ হবে।</p>
     </div>
     <div class="gallery-grid" id="throwbackGrid"></div>
   </div>
@@ -559,7 +559,7 @@
     <div class="section-head">
       <span class="eyebrow">Moments</span>
       <h2>Photo Gallery</h2>
-      <p></p>
+      <p>টুর্নামেন্ট শুরু হলে ম্যাচের ছবি এখানে যোগ হবে।</p>
     </div>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
@@ -676,8 +676,8 @@
   // season 1 throwback gallery: real photos + placeholders
   const throwbackGrid = document.getElementById('throwbackGrid');
   const SEASON1_PHOTOS = [
-    "images/season1-photo1.jpg",
-    "images/season1-photo2.jpg"
+    "season1-photo1.jpg",
+    "season1-photo2.jpg"
   ];
   SEASON1_PHOTOS.forEach(src=>{
     throwbackGrid.insertAdjacentHTML('beforeend', `
