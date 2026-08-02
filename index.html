@@ -229,6 +229,43 @@
   .team-card h3{font-size:0.95rem; font-weight:600;}
   .team-card p{font-size:0.75rem; color:rgba(245,245,240,0.55); margin-top:4px;}
 
+  /* RESULTS */
+  .results-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:16px;}
+  .result-card{
+    background:var(--pitch-mid); border:1px solid var(--line); border-radius:12px;
+    padding:20px;
+  }
+  .result-card .rc-top{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:1px; text-transform:uppercase;
+    color:rgba(245,245,240,0.5); margin-bottom:14px;
+  }
+  .result-card .rc-top .played{color:var(--floodlight);}
+  .result-card .rc-teams{
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    margin-bottom:14px;
+  }
+  .result-card .rc-team{font-weight:600; font-size:0.95rem; flex:1;}
+  .result-card .rc-team.right{text-align:right;}
+  .result-card .rc-score{
+    font-family:var(--mono); font-weight:700; font-size:1.5rem; color:var(--floodlight);
+    padding:0 10px; white-space:nowrap;
+  }
+  .result-card .rc-ht{
+    text-align:center; font-family:var(--mono); font-size:0.72rem;
+    color:rgba(245,245,240,0.5); margin-bottom:14px;
+  }
+  .result-card .rc-motm{
+    border-top:1px solid var(--line); padding-top:12px;
+    display:flex; align-items:center; gap:8px;
+    font-size:0.85rem;
+  }
+  .result-card .rc-motm .star{color:var(--floodlight);}
+  .result-card .rc-motm .lbl{
+    font-family:var(--mono); font-size:0.65rem; letter-spacing:1px; text-transform:uppercase;
+    color:rgba(245,245,240,0.5); display:block;
+  }
+
   table{width:100%; border-collapse:collapse; font-size:0.9rem;}
   thead th{
     font-family:var(--mono); font-size:0.72rem; letter-spacing:1px; text-transform:uppercase;
@@ -307,6 +344,7 @@
   <nav>
     <a href="#top" class="brand"><span class="dot"></span>FE&nbsp;Football&nbsp;S2</a>
     <div class="navlinks" id="navlinks">
+      <a href="#results">Results</a>
       <a href="#teams">Teams &amp; Fixtures</a>
       <a href="#table">Points Table</a>
       <a href="#register">Registration</a>
@@ -344,18 +382,31 @@
   <div class="ticker" id="ticker"></div>
 </div>
 
+<!-- LATEST RESULTS (homepage highlight) -->
+<section id="results">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">Scoreline</span>
+      <h2>Latest Results</h2>
+      <p>প্রতিটা ম্যাচের ফুল টাইম, হাফ টাইম স্কোর আর ম্যান অফ দ্য ম্যাচ — এক নজরে।</p>
+    </div>
+    <div class="results-grid" id="homeResultsGrid"></div>
+  </div>
+</section>
+
 <!-- TEAMS & FIXTURES -->
 <section id="teams">
   <div class="section-inner">
     <div class="section-head">
       <span class="eyebrow">Kick-off</span>
       <h2>Teams &amp; Fixtures</h2>
-      <p></p>
+      <p>টিমের নাম, লোগো, এবং ম্যাচ শিডিউল — চূড়ান্ত তথ্য দিয়ে সহজেই এখানে বসিয়ে দেওয়া যাবে।</p>
     </div>
 
     <div class="tabs">
       <button class="tab-btn active" data-tab="teams-panel">Teams</button>
       <button class="tab-btn" data-tab="fixtures-panel">Fixtures</button>
+      <button class="tab-btn" data-tab="results-panel">Results</button>
     </div>
 
     <div class="tab-panel active" id="teams-panel">
@@ -370,6 +421,10 @@
         <tbody id="fixtureBody"></tbody>
       </table>
     </div>
+
+    <div class="tab-panel" id="results-panel">
+      <div class="results-grid" id="resultsGrid"></div>
+    </div>
   </div>
 </section>
 
@@ -379,7 +434,7 @@
     <div class="section-head">
       <span class="eyebrow">Standings</span>
       <h2>Points Table</h2>
-      <p></p>
+      <p>টুর্নামেন্ট শুরু হলে অটোমেটিক আপডেট হবে না — ম্যাচ শেষে ম্যানুয়ালি নাম্বার বসাতে হবে।</p>
     </div>
     <table class="points-table">
       <thead>
@@ -455,9 +510,12 @@
     "Falcon FC","Titan United","Red Wolves","Thunder XI"
   ];
   const FIXTURES = [
-    {match:"SF1", teams:"Falcon FC vs Titan United", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming"},
-    {match:"SF2", teams:"Red Wolves vs Thunder XI",   date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming"},
-    {match:"Final", teams:"Winner SF1 vs Winner SF2", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming"},
+    {match:"SF1", teams:"Falcon FC vs Titan United", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+     played:false, ht:"", ft:"", motm:""},
+    {match:"SF2", teams:"Red Wolves vs Thunder XI",   date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+     played:false, ht:"", ft:"", motm:""},
+    {match:"Final", teams:"Winner SF1 vs Winner SF2", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+     played:false, ht:"", ft:"", motm:""},
   ];
   // -------------------------------------------------------------
 
@@ -499,6 +557,39 @@
         <td>${f.match}</td><td>${f.teams}</td><td>${f.date}</td><td>${f.time}</td><td>${f.venue}</td>
         <td class="center"><span class="status-tag">${f.status}</span></td>
       </tr>`);
+  });
+
+  // results cards (HT, FT, Man of the Match)
+  function resultCardHTML(f){
+    const [teamA, teamB] = f.teams.split(' vs ');
+    const played = f.played;
+    return `
+      <div class="result-card">
+        <div class="rc-top">
+          <span>${f.match} &middot; ${f.date}</span>
+          <span class="${played ? 'played' : ''}">${played ? 'Full Time' : 'Not Played Yet'}</span>
+        </div>
+        <div class="rc-teams">
+          <span class="rc-team">${teamA || '-'}</span>
+          <span class="rc-score">${played ? f.ft : 'vs'}</span>
+          <span class="rc-team right">${teamB || '-'}</span>
+        </div>
+        <div class="rc-ht">Half Time: ${played ? f.ht : 'TBA'}</div>
+        <div class="rc-motm">
+          <span class="star">★</span>
+          <span>
+            <span class="lbl">Man of the Match</span>
+            ${played && f.motm ? f.motm : 'TBA'}
+          </span>
+        </div>
+      </div>`;
+  }
+  const resultsGrid = document.getElementById('resultsGrid');
+  const homeResultsGrid = document.getElementById('homeResultsGrid');
+  FIXTURES.forEach(f=>{
+    const html = resultCardHTML(f);
+    resultsGrid.insertAdjacentHTML('beforeend', html);
+    homeResultsGrid.insertAdjacentHTML('beforeend', html);
   });
 
   // points table
