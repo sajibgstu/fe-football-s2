@@ -295,6 +295,15 @@
   .reg-note p{color:rgba(245,245,240,0.7); font-size:0.92rem;}
   .reg-note ul{margin-top:16px; padding-left:18px; color:rgba(245,245,240,0.7); font-size:0.88rem;}
   .reg-note li{margin-bottom:6px;}
+  .reg-cta-box{
+    align-self:center; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+    padding:30px 20px; border:1px dashed var(--line); border-radius:12px;
+    background:var(--pitch-deep);
+  }
+  .reg-cta-box svg{color:var(--floodlight);}
+  .reg-cta-txt{font-size:0.85rem; color:rgba(245,245,240,0.6);}
+  .reg-cta-btn{width:100%; text-align:center;}
   form{display:flex; flex-direction:column; gap:14px;}
   label{font-size:0.8rem; font-weight:600; color:rgba(245,245,240,0.8); margin-bottom:5px; display:block;}
   input, select{
@@ -452,36 +461,25 @@
       <span class="eyebrow">Sign Up</span>
       <h2>Team Registration</h2>
     </div>
-    <div class="reg-wrap">
+    <div class="reg-wrap reg-wrap-cta">
       <div class="reg-note">
         <h3>খেলার জন্য প্রস্তুত?</h3>
-        <p>নিচের ফর্মটি এখন ডেমো হিসেবে কাজ করছে — সাবমিট করলে শুধু কনফার্মেশন মেসেজ দেখাবে, ডেটা কোথাও জমা হচ্ছে না।</p>
+        <p>নিচের বাটনে ক্লিক করে Google Form-এ আপনার টিম রেজিস্ট্রেশন সম্পন্ন করুন। সব তথ্য সরাসরি organizer-দের কাছে জমা হবে।</p>
         <ul>
-          <li>রিয়েল সাবমিশন পেতে ফর্মটি Google Forms বা Formspree-এর সাথে যুক্ত করতে হবে</li>
-          <li>প্রতি টিমে সর্বনিম্ন প্লেয়ার সংখ্যা নির্ধারণ করে দেওয়া যাবে</li>
-          <li>রেজিস্ট্রেশন ডেডলাইন এখানে বসানো যাবে</li>
+          <li>প্রতি টিমে সর্বনিম্ন প্লেয়ার সংখ্যা ফর্মে উল্লেখ থাকবে</li>
+          <li>রেজিস্ট্রেশন ডেডলাইন ফর্মে দেখানো হবে</li>
+          <li>ফর্ম পূরণের পর confirmation পেতে সঠিক ফোন নম্বর দিন</li>
         </ul>
       </div>
-      <form id="regForm">
-        <div>
-          <label for="teamName">Team Name</label>
-          <input type="text" id="teamName" placeholder="যেমন: Falcon FC" required>
-        </div>
-        <div>
-          <label for="captain">Captain's Name</label>
-          <input type="text" id="captain" placeholder="নাম লিখুন" required>
-        </div>
-        <div>
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="01XXXXXXXXX" required>
-        </div>
-        <div>
-          <label for="batch">Batch / Semester</label>
-          <input type="text" id="batch" placeholder="যেমন: 45th Batch">
-        </div>
-        <button type="submit" class="btn btn-primary">রেজিস্ট্রেশন সাবমিট করুন</button>
-        <div class="form-msg" id="formMsg">✔ ধন্যবাদ! রেজিস্ট্রেশন রিসিভড হয়েছে (ডেমো মোড)।</div>
-      </form>
+      <div class="reg-cta-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="40" height="40">
+          <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
+          <path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>
+          <path d="M8 13h8M8 17h5"/>
+        </svg>
+        <p class="reg-cta-txt">রেজিস্ট্রেশন ফর্ম Google Forms-এ খুলবে</p>
+        <a href="#" id="regFormLink" target="_blank" rel="noopener" class="btn btn-primary reg-cta-btn">Register on Google Form</a>
+      </div>
     </div>
   </div>
 </section>
@@ -505,6 +503,7 @@
 
 <script>
   // ---------- EDIT ZONE: change these values freely ----------
+  const GOOGLE_FORM_URL = "https://forms.gle/Z4uTN61wGSSzSCdP6"; // paste your Google Form link
   const TOURNAMENT_DATE = "2026-08-11T15:00:00"; // countdown target
   const TEAMS = [
     "Falcon FC","Titan United","Red Wolves","Thunder XI"
@@ -633,12 +632,8 @@
   menuBtn.addEventListener('click', ()=> navlinks.classList.toggle('open'));
   navlinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navlinks.classList.remove('open')));
 
-  // registration form (demo only)
-  document.getElementById('regForm').addEventListener('submit', (e)=>{
-    e.preventDefault();
-    document.getElementById('formMsg').style.display = 'block';
-    e.target.reset();
-  });
+  // registration CTA -> Google Form
+  document.getElementById('regFormLink').href = GOOGLE_FORM_URL;
 </script>
 
 </body>
