@@ -34,7 +34,6 @@
   }
   a{color:inherit;}
 
-  /* turf stripe texture, repeats behind sections */
   .turf{
     background-image: repeating-linear-gradient(
       90deg,
@@ -69,7 +68,6 @@
   }
   .menu-btn{display:none; background:none; border:1px solid var(--line); color:var(--chalk); padding:8px 12px; border-radius:6px; font-size:1rem;}
 
-  /* HERO */
   .hero{
     position:relative;
     padding:90px 20px 70px;
@@ -79,7 +77,6 @@
       radial-gradient(ellipse at 50% -10%, rgba(242,194,48,0.16), transparent 50%),
       linear-gradient(180deg, var(--stadium-navy) 0%, var(--stadium-navy-mid) 45%, var(--pitch-dark) 100%);
   }
-  /* floodlight beams, like a stadium at night */
   .hero::before{
     content:"";
     position:absolute; inset:0;
@@ -88,7 +85,6 @@
       conic-gradient(from 160deg at 92% 0%, rgba(245,245,240,0.09), transparent 18%);
     pointer-events:none;
   }
-  /* scattered stars / confetti, world-cup night-sky feel */
   .hero::after{
     content:"";
     position:absolute; inset:0;
@@ -107,7 +103,6 @@
     color:var(--floodlight);
     filter:drop-shadow(0 0 14px rgba(242,194,48,0.45));
   }
-  /* original stadium-night silhouette illustration */
   .stadium-illustration{
     position:absolute; left:0; right:0; bottom:0;
     width:100%; height:220px;
@@ -199,7 +194,6 @@
   .btn-primary{background:var(--floodlight); color:var(--pitch-deep);}
   .btn-ghost{border-color:var(--line); color:var(--chalk); background:transparent;}
 
-  /* TICKER */
   .ticker-wrap{
     background:var(--card-red);
     border-top:1px solid rgba(0,0,0,0.15);
@@ -231,7 +225,6 @@
   }
   .section-head p{color:rgba(245,245,240,0.7); max-width:520px; margin-top:8px;}
 
-  /* TEAMS & FIXTURES */
   .tabs{display:flex; gap:10px; margin-bottom:28px; flex-wrap:wrap;}
   .tab-btn{
     font-family:var(--body); font-weight:600; font-size:0.88rem;
@@ -275,7 +268,6 @@
     background:var(--pitch-deep); border-radius:5px; padding:5px 9px;
   }
 
-  /* RESULTS */
   .results-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:16px;}
   .result-card{
     background:var(--pitch-mid); border:1px solid var(--line); border-radius:12px;
@@ -325,13 +317,11 @@
   }
   .center{text-align:center;}
 
-  /* POINTS TABLE */
   .points-table th, .points-table td{text-align:center;}
   .points-table th:first-child, .points-table td:first-child,
   .points-table th:nth-child(2), .points-table td:nth-child(2){text-align:left;}
   .points-table td.pts{color:var(--floodlight); font-weight:700; font-family:var(--mono);}
 
-  /* REGISTRATION */
   .reg-wrap{
     background:var(--pitch-mid); border:1px solid var(--line); border-radius:16px;
     padding:40px; display:grid; grid-template-columns:1fr 1fr; gap:40px;
@@ -360,7 +350,6 @@
   input::placeholder{color:rgba(245,245,240,0.35);}
   .form-msg{font-family:var(--mono); font-size:0.8rem; color:var(--floodlight); display:none; margin-top:6px;}
 
-  /* GALLERY */
   .gallery-grid{
     display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:14px;
   }
@@ -413,10 +402,8 @@
 
 <div class="hero" id="top">
   <svg class="stadium-illustration" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
-    <!-- stadium bowl silhouette -->
     <path d="M0,220 L0,150 Q600,40 1200,150 L1200,220 Z" fill="rgba(6,27,46,0.65)"/>
     <path d="M0,220 L0,175 Q600,95 1200,175 L1200,220 Z" fill="rgba(8,43,33,0.55)"/>
-    <!-- floodlight towers -->
     <g class="tower-light">
       <rect x="95" y="30" width="5" height="90" fill="rgba(245,245,240,0.18)"/>
       <rect x="80" y="15" width="35" height="16" rx="2" fill="rgba(242,194,48,0.35)"/>
@@ -427,7 +414,6 @@
       <rect x="1085" y="15" width="35" height="16" rx="2" fill="rgba(242,194,48,0.35)"/>
       <path d="M1102,31 L1045,140 L1160,140 Z" fill="rgba(242,194,48,0.06)"/>
     </g>
-    <!-- falling confetti, world-cup opening-night feel -->
     <rect class="confetto" x="150" y="0" width="5" height="9" fill="rgba(242,194,48,0.7)" style="animation-delay:0s"/>
     <rect class="confetto" x="300" y="0" width="5" height="9" fill="rgba(214,69,90,0.7)" style="animation-delay:1.4s"/>
     <rect class="confetto" x="480" y="0" width="5" height="9" fill="rgba(245,245,240,0.7)" style="animation-delay:0.6s"/>
@@ -466,7 +452,6 @@
   <div class="ticker" id="ticker"></div>
 </div>
 
-<!-- LATEST RESULTS (homepage highlight) -->
 <section id="results">
   <div class="section-inner">
     <div class="section-head">
@@ -478,7 +463,6 @@
   </div>
 </section>
 
-<!-- TEAMS & FIXTURES -->
 <section id="teams">
   <div class="section-inner">
     <div class="section-head">
@@ -512,7 +496,6 @@
   </div>
 </section>
 
-<!-- POINTS TABLE -->
 <section class="turf" id="table">
   <div class="section-inner">
     <div class="section-head">
@@ -529,7 +512,6 @@
   </div>
 </section>
 
-<!-- REGISTRATION -->
 <section id="register">
   <div class="section-inner">
     <div class="section-head">
@@ -559,7 +541,6 @@
   </div>
 </section>
 
-<!-- SEASON 1 THROWBACK GALLERY -->
 <section id="throwback">
   <div class="section-inner">
     <div class="section-head">
@@ -571,7 +552,6 @@
   </div>
 </section>
 
-<!-- GALLERY -->
 <section class="turf" id="gallery">
   <div class="section-inner">
     <div class="section-head">
@@ -591,24 +571,43 @@
 <script>
   // ---------- EDIT ZONE: change these values freely ----------
   const GOOGLE_FORM_URL = "https://forms.gle/Z4uTN61wGSSzSCdP6"; // paste your Google Form link
-  const TOURNAMENT_DATE = "2026-08-11T15:00:00"; // countdown target
+  const TOURNAMENT_DATE = "2026-08-05T15:00:00"; // countdown target
   const TEAMS = [
-    {name:"Phoenix XI", players:["Player 1","Player 2","Player 3","Player 4","Player 5"]},
-    {name:"Titan United", players:["Player 1","Player 2","Player 3","Player 4","Player 5"]},
-    {name:"Red Wolves", players:["Player 1","Player 2","Player 3","Player 4","Player 5"]},
-    {name:"Thunder XI", players:["Player 1","Player 2","Player 3","Player 4","Player 5"]},
+    {name:"Phoenix XI", owner:"Owner Name", players:[
+      "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
+      "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
+    ]},
+    {name:"Team B", owner:"Owner Name", players:[
+      "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
+      "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
+    ]},
+    {name:"Team C", owner:"Owner Name", players:[
+      "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
+      "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
+    ]},
+    {name:"Team D", owner:"Owner Name", players:[
+      "Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8",
+      "Player 9","Player 10","Player 11","Player 12","Player 13","Player 14","Player 15"
+    ]},
   ];
   const FIXTURES = [
-    {match:"1", teams:"Phoenix XI vs Titan United", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+    {match:"1", teams:"Phoenix XI vs Team B", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
      played:false, ht:"", ft:"", motm:""},
-    {match:"2", teams:"Red Wolves vs Thunder XI",   date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+    {match:"2", teams:"Phoenix XI vs Team C", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
      played:false, ht:"", ft:"", motm:""},
-    {match:"Final", teams:"Winner SF1 vs Winner SF2", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+    {match:"3", teams:"Phoenix XI vs Team D", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+     played:false, ht:"", ft:"", motm:""},
+    {match:"4", teams:"Team B vs Team C", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+     played:false, ht:"", ft:"", motm:""},
+    {match:"5", teams:"Team B vs Team D", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+     played:false, ht:"", ft:"", motm:""},
+    {match:"6", teams:"Team C vs Team D", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
+     played:false, ht:"", ft:"", motm:""},
+    {match:"Final", teams:"Winner Top-1 vs Top-2 (Points Table)", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
      played:false, ht:"", ft:"", motm:""},
   ];
   // -------------------------------------------------------------
 
-  // countdown
   function updateCountdown(){
     const target = new Date(TOURNAMENT_DATE).getTime();
     const now = new Date().getTime();
@@ -626,7 +625,6 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // teams grid
   const teamGrid = document.getElementById('teamGrid');
   TEAMS.forEach(team=>{
     const initials = team.name.split(' ').map(w=>w[0]).join('').slice(0,2);
@@ -635,15 +633,14 @@
       <div class="team-card">
         <div class="crest">${initials}</div>
         <h3>${team.name}</h3>
-        <p>Group Stage</p>
+        <p class="owner">Owner: ${team.owner || 'TBA'}</p>
         <details class="player-list">
-          <summary>Player List</summary>
+          <summary>Player List (${(team.players||[]).length})</summary>
           <ul>${playersHTML}</ul>
         </details>
       </div>`);
   });
 
-  // fixtures table
   const fixtureBody = document.getElementById('fixtureBody');
   FIXTURES.forEach(f=>{
     fixtureBody.insertAdjacentHTML('beforeend', `
@@ -653,7 +650,6 @@
       </tr>`);
   });
 
-  // results cards (HT, FT, Man of the Match)
   function resultCardHTML(f){
     const [teamA, teamB] = f.teams.split(' vs ');
     const played = f.played;
@@ -686,7 +682,6 @@
     homeResultsGrid.insertAdjacentHTML('beforeend', html);
   });
 
-  // points table
   const pointsBody = document.getElementById('pointsBody');
   TEAMS.forEach((team,i)=>{
     pointsBody.insertAdjacentHTML('beforeend', `
@@ -695,11 +690,9 @@
       </tr>`);
   });
 
-  // ticker
   const tickerText = FIXTURES.map(f=>`⚽ ${f.teams} — ${f.date}`).join('   •   ');
   document.getElementById('ticker').innerHTML = (tickerText + '   •   ').repeat(2);
 
-  // season 1 throwback gallery: real photos + placeholders
   const throwbackGrid = document.getElementById('throwbackGrid');
   const SEASON1_PHOTOS = [
     "season1-photo1.jpg",
@@ -721,7 +714,6 @@
       </div>`);
   }
 
-  // gallery placeholders
   const galleryGrid = document.getElementById('galleryGrid');
   for(let i=0;i<8;i++){
     galleryGrid.insertAdjacentHTML('beforeend', `
@@ -733,7 +725,6 @@
       </div>`);
   }
 
-  // tabs
   document.querySelectorAll('.tab-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -743,13 +734,11 @@
     });
   });
 
-  // mobile menu
   const menuBtn = document.getElementById('menuBtn');
   const navlinks = document.getElementById('navlinks');
   menuBtn.addEventListener('click', ()=> navlinks.classList.toggle('open'));
   navlinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navlinks.classList.remove('open')));
 
-  // registration CTA -> Google Form
   document.getElementById('regFormLink').href = GOOGLE_FORM_URL;
 </script>
 
