@@ -256,6 +256,24 @@
   }
   .team-card h3{font-size:0.95rem; font-weight:600;}
   .team-card p{font-size:0.75rem; color:rgba(245,245,240,0.55); margin-top:4px;}
+  .team-card .player-list{margin-top:12px; text-align:left;}
+  .team-card .player-list summary{
+    cursor:pointer; list-style:none;
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:1px; text-transform:uppercase;
+    color:var(--floodlight); text-align:center;
+    padding:6px 0; border-top:1px solid var(--line);
+  }
+  .team-card .player-list summary::-webkit-details-marker{display:none;}
+  .team-card .player-list summary::after{content:" ▾"; }
+  .team-card .player-list[open] summary::after{content:" ▴"; }
+  .team-card .player-list ul{
+    list-style:none; margin-top:8px; padding:0;
+    display:flex; flex-direction:column; gap:5px;
+  }
+  .team-card .player-list li{
+    font-size:0.78rem; color:rgba(245,245,240,0.75);
+    background:var(--pitch-deep); border-radius:5px; padding:5px 9px;
+  }
 
   /* RESULTS */
   .results-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:16px;}
@@ -428,7 +446,7 @@
   </svg>
   <div class="eyebrow">Food Engineering Presents</div>
   <h1>INTRA DEPARTMENT<br><span>FOOTBALL</span> TOURNAMENT</h1>
-  <p class="sub">2026 &middot; Season 2 — টিম রেজিস্ট্রেশন, ফিক্সচার, পয়েন্ট টেবিল সব একসাথে।</p>
+  <p class="sub">2026 &middot; Season 2 — প্লেয়ার রেজিস্ট্রেশন, ফিক্সচার, পয়েন্ট টেবিল সব একসাথে।</p>
 
   <div class="scoreboard" id="countdown">
     <div class="flip"><span class="num" id="cd-days">00</span><span class="lbl">Days</span></div>
@@ -438,7 +456,7 @@
   </div>
 
   <div class="cta">
-    <a href="#register" class="btn btn-primary">টিম রেজিস্টার করুন</a>
+    <a href="#register" class="btn btn-primary">প্লেয়ার রেজিস্টার করুন</a>
     <a href="#teams" class="btn btn-ghost">ফিক্সচার দেখুন</a>
   </div>
   </div>
@@ -516,12 +534,12 @@
   <div class="section-inner">
     <div class="section-head">
       <span class="eyebrow">Sign Up</span>
-      <h2>Team Registration</h2>
+      <h2>Player Registration</h2>
     </div>
     <div class="reg-wrap reg-wrap-cta">
       <div class="reg-note">
         <h3>খেলার জন্য প্রস্তুত?</h3>
-        <p>নিচের বাটনে ক্লিক করে Google Form-এ আপনার টিম রেজিস্ট্রেশন সম্পন্ন করুন। সব তথ্য সরাসরি organizer-দের কাছে জমা হবে।</p>
+        <p>নিচের বাটনে ক্লিক করে Google Form-এ আপনার প্লেয়ার রেজিস্ট্রেশন সম্পন্ন করুন। সব তথ্য সরাসরি organizer-দের কাছে জমা হবে।</p>
         <ul>
           <li>প্রতি টিমে সর্বনিম্ন প্লেয়ার সংখ্যা ফর্মে উল্লেখ থাকবে</li>
           <li>রেজিস্ট্রেশন ডেডলাইন ফর্মে দেখানো হবে</li>
@@ -575,7 +593,10 @@
   const GOOGLE_FORM_URL = "https://forms.gle/Z4uTN61wGSSzSCdP6"; // paste your Google Form link
   const TOURNAMENT_DATE = "2026-08-11T15:00:00"; // countdown target
   const TEAMS = [
-    "Falcon FC","Titan United","Red Wolves","Thunder XI"
+    {name:"Falcon FC", players:["Player 1","Player 2","Player 3","Player 4","Player 5"]},
+    {name:"Titan United", players:["Player 1","Player 2","Player 3","Player 4","Player 5"]},
+    {name:"Red Wolves", players:["Player 1","Player 2","Player 3","Player 4","Player 5"]},
+    {name:"Thunder XI", players:["Player 1","Player 2","Player 3","Player 4","Player 5"]},
   ];
   const FIXTURES = [
     {match:"SF1", teams:"Falcon FC vs Titan United", date:"TBA", time:"TBA", venue:"Main Ground", status:"Upcoming",
@@ -607,13 +628,18 @@
 
   // teams grid
   const teamGrid = document.getElementById('teamGrid');
-  TEAMS.forEach(name=>{
-    const initials = name.split(' ').map(w=>w[0]).join('').slice(0,2);
+  TEAMS.forEach(team=>{
+    const initials = team.name.split(' ').map(w=>w[0]).join('').slice(0,2);
+    const playersHTML = (team.players||[]).map(p=>`<li>${p}</li>`).join('');
     teamGrid.insertAdjacentHTML('beforeend', `
       <div class="team-card">
         <div class="crest">${initials}</div>
-        <h3>${name}</h3>
+        <h3>${team.name}</h3>
         <p>Group Stage</p>
+        <details class="player-list">
+          <summary>Player List</summary>
+          <ul>${playersHTML}</ul>
+        </details>
       </div>`);
   });
 
@@ -662,10 +688,10 @@
 
   // points table
   const pointsBody = document.getElementById('pointsBody');
-  TEAMS.forEach((name,i)=>{
+  TEAMS.forEach((team,i)=>{
     pointsBody.insertAdjacentHTML('beforeend', `
       <tr>
-        <td>${i+1}</td><td>${name}</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="pts">0</td>
+        <td>${i+1}</td><td>${team.name}</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="pts">0</td>
       </tr>`);
   });
 
