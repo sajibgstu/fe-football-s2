@@ -107,6 +107,34 @@
     color:var(--floodlight);
     filter:drop-shadow(0 0 14px rgba(242,194,48,0.45));
   }
+  /* original stadium-night silhouette illustration */
+  .stadium-illustration{
+    position:absolute; left:0; right:0; bottom:0;
+    width:100%; height:220px;
+    pointer-events:none;
+    z-index:0;
+  }
+  .stadium-illustration .tower-light{
+    animation: floodlight-flicker 4.5s ease-in-out infinite;
+    transform-origin:center;
+  }
+  .stadium-illustration .tower-light:nth-child(2){animation-delay:1.1s;}
+  .stadium-illustration .confetto{
+    animation: confetti-fall 6s linear infinite;
+  }
+  @keyframes floodlight-flicker{
+    0%, 100%{opacity:0.55;}
+    50%{opacity:0.95;}
+  }
+  @keyframes confetti-fall{
+    0%{transform:translateY(-10px) rotate(0deg); opacity:0;}
+    10%{opacity:1;}
+    100%{transform:translateY(160px) rotate(220deg); opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .stadium-illustration .tower-light, .stadium-illustration .confetto{animation:none;}
+  }
+  .hero-content{position:relative; z-index:1;}
   .eyebrow{
     font-family:var(--mono);
     font-size:0.8rem;
@@ -325,6 +353,7 @@
     color:rgba(245,245,240,0.4); font-size:0.78rem; text-align:center; padding:10px;
   }
   .gallery-slot svg{width:28px; height:28px; opacity:0.5;}
+  .gallery-slot img{width:100%; height:100%; object-fit:cover; border-radius:10px; display:block;}
 
   footer{
     border-top:1px solid var(--line);
@@ -357,6 +386,7 @@
       <a href="#teams">Teams &amp; Fixtures</a>
       <a href="#table">Points Table</a>
       <a href="#register">Registration</a>
+      <a href="#throwback">Season 1 Highlights</a>
       <a href="#gallery">Gallery</a>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
@@ -364,6 +394,32 @@
 </header>
 
 <div class="hero" id="top">
+  <svg class="stadium-illustration" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
+    <!-- stadium bowl silhouette -->
+    <path d="M0,220 L0,150 Q600,40 1200,150 L1200,220 Z" fill="rgba(6,27,46,0.65)"/>
+    <path d="M0,220 L0,175 Q600,95 1200,175 L1200,220 Z" fill="rgba(8,43,33,0.55)"/>
+    <!-- floodlight towers -->
+    <g class="tower-light">
+      <rect x="95" y="30" width="5" height="90" fill="rgba(245,245,240,0.18)"/>
+      <rect x="80" y="15" width="35" height="16" rx="2" fill="rgba(242,194,48,0.35)"/>
+      <path d="M97,31 L40,140 L155,140 Z" fill="rgba(242,194,48,0.06)"/>
+    </g>
+    <g class="tower-light">
+      <rect x="1100" y="30" width="5" height="90" fill="rgba(245,245,240,0.18)"/>
+      <rect x="1085" y="15" width="35" height="16" rx="2" fill="rgba(242,194,48,0.35)"/>
+      <path d="M1102,31 L1045,140 L1160,140 Z" fill="rgba(242,194,48,0.06)"/>
+    </g>
+    <!-- falling confetti, world-cup opening-night feel -->
+    <rect class="confetto" x="150" y="0" width="5" height="9" fill="rgba(242,194,48,0.7)" style="animation-delay:0s"/>
+    <rect class="confetto" x="300" y="0" width="5" height="9" fill="rgba(214,69,90,0.7)" style="animation-delay:1.4s"/>
+    <rect class="confetto" x="480" y="0" width="5" height="9" fill="rgba(245,245,240,0.7)" style="animation-delay:0.6s"/>
+    <rect class="confetto" x="650" y="0" width="5" height="9" fill="rgba(242,194,48,0.7)" style="animation-delay:2.2s"/>
+    <rect class="confetto" x="820" y="0" width="5" height="9" fill="rgba(214,69,90,0.7)" style="animation-delay:1s"/>
+    <rect class="confetto" x="980" y="0" width="5" height="9" fill="rgba(245,245,240,0.7)" style="animation-delay:2.8s"/>
+    <rect class="confetto" x="1060" y="0" width="5" height="9" fill="rgba(242,194,48,0.7)" style="animation-delay:0.3s"/>
+  </svg>
+
+  <div class="hero-content">
   <svg class="trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
     <path d="M8 21h8"/><path d="M12 17v4"/>
     <path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/>
@@ -384,6 +440,7 @@
   <div class="cta">
     <a href="#register" class="btn btn-primary">টিম রেজিস্টার করুন</a>
     <a href="#teams" class="btn btn-ghost">ফিক্সচার দেখুন</a>
+  </div>
   </div>
 </div>
 
@@ -481,6 +538,18 @@
         <a href="#" id="regFormLink" target="_blank" rel="noopener" class="btn btn-primary reg-cta-btn">Register on Google Form</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- SEASON 1 THROWBACK GALLERY -->
+<section id="throwback">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">Throwback</span>
+      <h2>Season 1 Highlights</h2>
+      <p>গত সিজনের সেরা মুহূর্তগুলো — এখানে আগের টুর্নামেন্টের ছবি যোগ হবে।</p>
+    </div>
+    <div class="gallery-grid" id="throwbackGrid"></div>
   </div>
 </section>
 
@@ -603,6 +672,28 @@
   // ticker
   const tickerText = FIXTURES.map(f=>`⚽ ${f.teams} — ${f.date}`).join('   •   ');
   document.getElementById('ticker').innerHTML = (tickerText + '   •   ').repeat(2);
+
+  // season 1 throwback gallery: real photos + placeholders
+  const throwbackGrid = document.getElementById('throwbackGrid');
+  const SEASON1_PHOTOS = [
+    "images/season1-photo1.jpg",
+    "images/season1-photo2.jpg"
+  ];
+  SEASON1_PHOTOS.forEach(src=>{
+    throwbackGrid.insertAdjacentHTML('beforeend', `
+      <div class="gallery-slot">
+        <img src="${src}" alt="Season 1 tournament photo" loading="lazy">
+      </div>`);
+  });
+  for(let i=0;i<6;i++){
+    throwbackGrid.insertAdjacentHTML('beforeend', `
+      <div class="gallery-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/>
+        </svg>
+        Season 1 photo
+      </div>`);
+  }
 
   // gallery placeholders
   const galleryGrid = document.getElementById('galleryGrid');
